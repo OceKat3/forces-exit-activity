@@ -27,6 +27,12 @@ class Vec{
     }
     return this;
   }
+  lerp(other, t){
+    return new Vec(
+      this.x + (other.x - this.x) * t,
+      this.y + (other.y - this.y) * t
+    );
+  }
   div(other){
     if(other === Vec){
       this.x /= other.x;
@@ -57,6 +63,9 @@ class Vec{
   
   limit(amnt){
     if(this.x == 0 && this.y == 0) return this;
+    
+    if(this.x != this.x || this.y != this.y) {this.zero(); return this;}
+    
     let temp = this.unit().mult(constrain(this.mag(), -amnt, amnt));
     this.x = temp.x;
     this.y = temp.y;
