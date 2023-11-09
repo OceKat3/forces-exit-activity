@@ -5,12 +5,14 @@ class Body{
     this.vel = new Vec(0.0, 0.0);
     this.Fnet = new Vec(0.0,0.0);
     this.m = 1;
+    if(randomize_masses) this.m *= sq(random(0.5, 1)) * 3
     this.r = 5;
     this.col = color(random(255), random(255), random(255));
   }
   
   show(){
     //print('showing circle at y', this.pos.y, 'r', this.r);
+    this.r = sqrt(this.m) * 5;
     noStroke();
     fill(255,random(15,30));
     ellipse(this.pos.x, this.pos.y, (this.r * 2) + 11);
