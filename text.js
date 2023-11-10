@@ -7,7 +7,7 @@ Right click near an object make it the system
 
 C to clear all objects
 
-numbers 1 - 4 go to template scenes
+numbers 1 - 5 go to template scenes
 
 M to toggle mass randomization
 (try some templates with random mass on/off)

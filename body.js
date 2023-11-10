@@ -12,7 +12,7 @@ class Body{
   
   show(){
     //print('showing circle at y', this.pos.y, 'r', this.r);
-    this.r = sqrt(this.m) * 5;
+    this.r = pow(this.m, 1/4) * 5;
     noStroke();
     fill(255,random(15,30));
     ellipse(this.pos.x, this.pos.y, (this.r * 2) + 11);

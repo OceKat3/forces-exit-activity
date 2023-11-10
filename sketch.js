@@ -121,7 +121,9 @@ function keyPressed(){
     case '4': //straight line
       physics.make_line();
       break;
-
+    case '5':
+      physics.make_galaxy();
+      break;
   }
 }
 

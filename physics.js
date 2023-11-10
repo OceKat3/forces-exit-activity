@@ -2,9 +2,8 @@
 // let timeScale = 1;
 // let distanceScale = .0001;
 
-const distanceScale = 0.0001;
-
-let G = 1; // mass scale
+let distanceScale = 0.0001;
+let G = 1; 
 let timeScale = 1;
 let rexp = 1;
 
@@ -110,6 +109,13 @@ class Physics {
       stroke(255); strokeWeight(4); noFill();
       circle(this.system.pos.x, this.system.pos.y, 30);
     }
+    else if(force_view) {
+      textSize(16);
+      noStroke();
+      fill(255);
+      textAlign(CENTER);
+      text("select system", width-110, 30);
+    }
     pop();
   }
   
@@ -118,7 +124,7 @@ class Physics {
     
     let amnt = 650;
     let center = new Vec(width/2, height/2);
-    let sideLength = width * 0.35
+    let sideLength = min(width, height) * 0.4
     
     let corners = [
       new Vec(1, 1),
@@ -165,7 +171,7 @@ class Physics {
   make_random(){
     this.clearBodies();
     
-    let numPoints = 1200;
+    let numPoints = 1000;
     let margin = 60;
     for (let i = 0.0; i < numPoints; i++) {
 
@@ -184,11 +190,25 @@ class Physics {
     
     let numPoints = 400;
     for(let i = 0; i < numPoints; i++){
-      let x = map(i, 0, numPoints, -width, width)*0.4 + width/2;
+      let x = map(i, 0, numPoints, -width, width)*0.2 + width/2;
       let y = height/2;
       let b = new Body(x,y);
       this.addBody(b);
     }
+  }
+  
+  make_galaxy(){
+    this.clearBodies();
+    let center = new Vec(width/2, height/2);
+    let big_b = new Body(center.x, center.y)
+    big_b.m = 150;
+    big_b.col = color(255);
+    let numPoints = 250;
+    for(let i = 0; i < numPoints; i++){
+      let b = new Body(center.x + random(-400, 400), center.y + random(-400, 400));
+      this.addBody(b);
+    }
+    this.addBody(big_b);
   }
   
   addBody(n){
@@ -211,7 +231,7 @@ class Physics {
     //print('n1', this.bodies)
     for(let b of this.bodies){
       //limit Fnet to prevent suddent movements (inaccuracy of framerate)
-      b.Fnet.limit(60);
+      b.Fnet.limit(200);
       
       //acceleration = force / mass
       let acc = b.Fnet.copy().div(b.m);

@@ -5,7 +5,7 @@ class Vec{
     this.y = y;
     return this;
   }
-  
+
   add(other){
     this.x += other.x;
     this.y += other.y;
